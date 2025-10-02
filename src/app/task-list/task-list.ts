@@ -1,20 +1,12 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TaskService } from './services/service.task';
+import { TaskService } from '../services/service.task';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-task-list',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [CommonModule],
   template: `
-    <h1>Task Manager</h1>
-
-    <!-- Task Form -->
-    <input [(ngModel)]="newTask" placeholder="Enter task" />
-    <button (click)="addTask()">Add Task</button>
-
-    <!-- Task List -->
     <ul>
       <li *ngFor="let task of taskService.getTasks()">
         <input
@@ -25,21 +17,12 @@ import { TaskService } from './services/service.task';
         <span [style.text-decoration]="task.completed ? 'line-through' : 'none'">
           {{ task.title }}
         </span>
-        <button (click)="taskService.removeTask(task.id)">❌</button>
+        <button (click)="taskService.removeTask(task.id)"></button>
       </li>
     </ul>
-
-    <!-- Summary -->
     <p>Total Tasks: {{ taskService.getTotalTasks() }}</p>
   `
 })
-export class AppComponent {
-  newTask = '';
-
+export class TaskListComponent {
   constructor(public taskService: TaskService) {}
-
-  addTask() {
-    this.taskService.addTask(this.newTask);
-    this.newTask = '';
-  }
 }
