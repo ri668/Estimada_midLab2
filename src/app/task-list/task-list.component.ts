@@ -13,11 +13,4 @@ import { RouterModule } from '@angular/router';
 export class TaskListComponent{
   constructor(public taskService: TaskService) {}
 
-  get remainingTasks(): number {
-    return this.taskService.getTotalTasks();
-  }
-
-  get completedTasks(): number {
-    return this.taskService.getTasks().filter(task => task.completed).length;
-  }
 }

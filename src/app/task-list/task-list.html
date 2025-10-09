@@ -31,13 +31,7 @@
             <label class="form-check-label small text-muted" for="task-{{ task.id }}">
               Completed
             </label>
-          </div>
-          <button
-            class="btn btn-sm btn-outline-danger"
-            (click)="taskService.removeTask(task.id)"
-          >
-            Remove
-          </button>
+          </div>  
         </div>
       </li>
     </ul>
@@ -45,8 +39,6 @@
     <!-- Task Summary -->
     <div *ngIf="taskService.getTasks().length > 0" class="" style="justify-content: space-between; display: flex;">
       <p class="text-muted mb-1">Total: {{ taskService.getTotalTasks() }} tasks</p>
-      <p class="text-success mb-1">Completed: {{ completedTasks }}</p>
-      <p class="text-primary">Remaining: {{ remainingTasks - completedTasks }}</p>
     </div>
   </div>
 </div>

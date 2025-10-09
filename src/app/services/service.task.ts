@@ -29,10 +29,6 @@ export class TaskService {
     }
   }
 
-  removeTask(id: number): void {
-    this.tasks = this.tasks.filter(t => t.id !== id);
-  }
-
   getTotalTasks(): number {
     return this.tasks.length;
   }
