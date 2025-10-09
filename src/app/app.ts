@@ -2,44 +2,15 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TaskService } from './services/service.task';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, CommonModule],
-  template: `
-    <h1>Task Manager</h1>
-
-    <!-- Task Form -->
-    <input [(ngModel)]="newTask" placeholder="Enter task" />
-    <button (click)="addTask()">Add Task</button>
-
-    <!-- Task List -->
-    <ul>
-      <li *ngFor="let task of taskService.getTasks()">
-        <input
-          type="checkbox"
-          [checked]="task.completed"
-          (change)="taskService.toggleTask(task.id)"
-        />
-        <span [style.text-decoration]="task.completed ? 'line-through' : 'none'">
-          {{ task.title }}
-        </span>
-        <button (click)="taskService.removeTask(task.id)">❌</button>
-      </li>
-    </ul>
-
-    <!-- Summary -->
-    <p>Total Tasks: {{ taskService.getTotalTasks() }}</p>
-  `
+  imports: [FormsModule, CommonModule, RouterModule],
+  templateUrl: './app.html',
+  styleUrls: ['./app.css']
 })
 export class AppComponent {
-  newTask = '';
-
-  constructor(public taskService: TaskService) {}
-
-  addTask() {
-    this.taskService.addTask(this.newTask);
-    this.newTask = '';
-  }
+  
 }

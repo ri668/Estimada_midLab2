@@ -1,1 +1,52 @@
-<p>task-list works!</p>
+<div class="card shadow-sm border-0">
+  <div class="card-body">
+    <h5 class="mb-3 text-center">Task List</h5>
+
+    <!-- Show message if there are no tasks -->
+    <div *ngIf="taskService.getTasks().length === 0" class="text-center text-muted my-4">
+      No tasks yet
+    </div>
+
+    <!-- Task List -->
+    <ul *ngIf="taskService.getTasks().length > 0" class="list-group mb-3">
+      <li
+        *ngFor="let task of taskService.getTasks()"
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <!-- Task title -->
+        <span [style.textDecoration]="task.completed ? 'line-through' : 'none'">
+          {{ task.title }}
+        </span>
+
+        <!-- Actions: checkbox + remove -->
+        <div class="d-flex align-items-center">
+          <div class="form-check me-3">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [checked]="task.completed"
+              (change)="taskService.toggleTask(task.id)"
+              id="task-{{ task.id }}"
+            />
+            <label class="form-check-label small text-muted" for="task-{{ task.id }}">
+              Completed
+            </label>
+          </div>
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="taskService.removeTask(task.id)"
+          >
+            Remove
+          </button>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Task Summary -->
+    <div *ngIf="taskService.getTasks().length > 0" class="" style="justify-content: space-between; display: flex;">
+      <p class="text-muted mb-1">Total: {{ taskService.getTotalTasks() }} tasks</p>
+      <p class="text-success mb-1">Completed: {{ completedTasks }}</p>
+      <p class="text-primary">Remaining: {{ remainingTasks - completedTasks }}</p>
+    </div>
+  </div>
+</div>
